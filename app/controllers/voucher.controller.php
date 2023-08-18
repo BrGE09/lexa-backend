@@ -23,7 +23,7 @@ class VoucherController extends BaseDatos
     {
 
         try {
-            $query = "SELECT * FROM tbl_voucher WHERE folio = $folio;";
+            $query = "SELECT folio, partner, import FROM tbl_voucher WHERE folio = $folio;";
 
             $response = $this->consulta($query);
 

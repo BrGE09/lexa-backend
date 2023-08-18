@@ -1,5 +1,5 @@
 <?php
-require 'vendor/autoload.php';
+require '../../vendor/autoload.php';
 require_once("../controllers/voucher.controller.php");
 
 use Luecano\NumeroALetras\NumeroALetras;
@@ -25,12 +25,12 @@ class VoucherModel
     public function recibo()
     {
         $obj = new VoucherController();
-        $row = $obj->generateVoucher($_GET["folio"]);
+        $row = $obj->generateVoucher($_REQUEST["folio"]);
         $esp = $this->fecha(new DateTime());
 
         if (!empty($row)) {
 
-            $formatter = new NumeroALetras(); //Importar libreria de composer
+            $formatter = new NumeroALetras();
             $formatter->conector = 'Y';
             $importe = $formatter->toMoney($row->import, 2, 'pesos', 'centavos');
 
