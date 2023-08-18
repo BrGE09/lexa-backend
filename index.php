@@ -104,6 +104,3 @@
     </form>
 </body>
 </html>
-
-CREDENCIALES 
-RECORSD
