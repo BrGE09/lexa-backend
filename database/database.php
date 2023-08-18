@@ -9,7 +9,7 @@ class BaseDatos{
         $servidor = "localhost";
         $usuario = "root";
         $pass = "";
-        $database = "lexa";
+        $database = "Lexa";
 
         $this->mysqli = new mysqli($servidor, $usuario, $pass, $database);
 
