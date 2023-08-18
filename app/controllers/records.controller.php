@@ -4,16 +4,16 @@ require_once("../../database/database.php");
 class RecordsController extends BaseDatos
 {
 
-    public function createRecord($nombre, $apM, $apP, $fNacimiento, $calle, $noExt, $noInt, $colonia, $ciudad, $estado, $cp, $curp, $rfc, $lada, $noTlf, $correo, $nombreCuenta, $idBanco, $clabe, $fechaRegistro, $horaRegistro, $horaActualizacion, $estadoSocio, $rol)
+    public function createRecord($nombre, $apM, $apP, $fNacimiento, $calle, $noExt, $noInt, $colonia, $ciudad, $estado, $cp, $curp, $rfc, $lada, $noTlf, $correo, $nombreCta, $idBanco, $clabe, $fechaRegtro, $hrRegistro, $horaAct)
     {
 
         try {
 
-            $query = "INSERT INTO tbl_records (name, last_name, mother_last_name, birth_date, street, outdoor_number, number, cologne, city, state, cp, curp, rfc, lada_number, telephone_number, email, name_holder_cb, id_banks, account_clabe_cb, id_status_signature, digital_signature, document_path, registration_date, record_time, record_update, id_status_record, id_rol)
-            VALUES ('$nombre', '$apM', '$apP', '$fNacimiento', '$calle', '$noExt', '$noInt', '$colonia', '$ciudad', '$estado', '$cp', '$curp', '$rfc', '$lada', '$noTlf', '$correo', '$nombreCuenta', '$idBanco', '$clabe', '$fechaRegistro', '$horaRegistro', '$horaActualizacion', '$estadoSocio', '$rol');";
+            $query = "INSERT INTO tbl_records (name, last_name, mother_last_name, birth_date, street, outdoor_number, number, cologne, city, state, cp, curp, rfc, lada_number, telephone_number, email, name_holder_cb, id_banks, account_clabe_cb, registration_date, record_time, record_update)
+            VALUES ('$nombre', '$apM', '$apP', '$fNacimiento', '$calle', '$noExt', '$noInt', '$colonia', '$ciudad', '$estado', '$cp', '$curp', '$rfc', '$lada', '$noTlf', '$correo', '$nombreCta', '$idBanco', '$clabe', '$fechaRegtro', '$hrRegistro', '$horaAct');";
 
             if ($this->consulta($query)) {
-                header("Location: ...");
+                header("Location: /Lexa-Backend/index.php?=Datos guardadosß");
             }
         } catch (Exception $e) {
             echo ("Error: Ocurrió un error inesperado:" . $e);
