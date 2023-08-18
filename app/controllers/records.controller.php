@@ -1,5 +1,4 @@
 <?php
-
 require_once("../../database/database.php");
 
 class RecordsController extends BaseDatos
