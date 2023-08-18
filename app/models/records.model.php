@@ -5,7 +5,7 @@ require_once("../controllers/records.controller.php");
 class RecordsModel
 {
 
-    public static function nuevoRecord()
+    public static function newRecord()
     {
 
         $control = new RecordsController();
@@ -35,7 +35,7 @@ class RecordsModel
         $hrRegistro  = $ahora->format("h:i:s");
         $hrAct       = $ahora->format("Y-m-d h:i:s");
 
-        $control->createRecord($nombre, $apM, $apP, $fNacimiento, $calle, $noExt, $noInt, $colonia, $ciudad, $estado, $cp, $curp,     $rfc, $lada, $noTlf, $correo, $nombreCta, $idBanco, $clabe, $fechaRgtro, $hrRegistro, $hrAct);
+        $control->createRecord($nombre, $apM, $apP, $fNacimiento, $calle, $noExt, $noInt, $colonia, $ciudad, $estado, $cp, $curp, $rfc, $lada, $noTlf, $correo, $nombreCta, $idBanco, $clabe, $fechaRgtro, $hrRegistro, $hrAct);
     }
 
     public function verRecords(){
