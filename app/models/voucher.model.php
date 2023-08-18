@@ -22,6 +22,52 @@ class VoucherModel
         return array("mes" => $nombreMes);
     }
 
+    public function importCSV()
+    {
+        $obj = new VoucherController();
+        $tipo       = $_FILES['dataCliente']['type'];
+        $tamanio    = $_FILES['dataCliente']['size'];
+        $archivotmp = $_FILES['dataCliente']['tmp_name'];
+        $lineas     = file($archivotmp);
+
+        $i = 0;
+
+        foreach ($lineas as $linea) {
+            $cantidad_registros = count($lineas);
+            $cantidad_regist_agregados =  ($cantidad_registros - 1);
+
+            if ($i != 0) {
+                
+                $datos = explode(',', $linea);
+                $datoImporte = str_replace(['$', ','], '', $datos);
+                // var_dump($datos);
+                // exit;
+
+                $NodeRecibo = !empty($datos[0])  ? ($datos[0]) : '0';
+                $CIA = !empty($datos[1])  ? ($datos[1]) : '';
+                $Cuentadeorigen = !empty($datos[2])  ? ($datos[2]) : '0';
+                $idUsuario = !empty($datos[3])  ? ($datos[3]) : '0';
+                $SocioComanditario = !empty($datos[4])  ? ($datos[4]) : '';
+                $Banco = !empty($datos[5])  ? ($datos[5]) : '';
+                $IdBancario = !empty($datos[6])  ? ($datos[6]) : '0';
+                $CuentaBancaria = !empty($datos[7])  ? ($datos[7]) : '0';
+                $CLABEInterbancaria = !empty($datos[8])  ? ($datos[8]) : '';
+                $Importe = !empty($datoImporte[9])  ? ($datoImporte[9]) : '0';
+                $Fechaderecibo = !empty($datos[10])  ? ($datos[10]) : '';
+                $Status = !empty($datos[11])  ? ($datos[11]) : '';
+                $Etapa = !empty($datos[12])  ? ($datos[12]) : '';
+                $FechadePago = !empty($datos[13])  ? ($datos[13]) : '';
+                $Fechaderecibo = date('y-m-d', strtotime($Fechaderecibo));
+                $FechadePago = date('y-m-d', strtotime($FechadePago));
+
+                $obj->createVoucher($NodeRecibo, $CIA, $Cuentadeorigen, $idUsuario, $SocioComanditario, $Banco, $IdBancario, $CuentaBancaria, $CLABEInterbancaria, $Importe, $Fechaderecibo, $Status, $Etapa, $FechadePago);
+
+            }
+
+            $i++;
+        }
+    }
+
     public function recibo()
     {
         $obj = new VoucherController();
