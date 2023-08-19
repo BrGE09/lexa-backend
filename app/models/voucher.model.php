@@ -108,7 +108,7 @@ class VoucherModel
             $xYear = 2180;
             $yYear = 1280;
 
-            $name = $row["partner"];
+            $name = $row->partner;
             $xName = 600;
             $yName = 1418;
 
