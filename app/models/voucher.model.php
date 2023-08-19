@@ -33,8 +33,7 @@ class VoucherModel
         $i = 0;
 
         foreach ($lineas as $linea) {
-            $cantidad_registros = count($lineas);
-            $cantidad_regist_agregados =  ($cantidad_registros - 1);
+            count($lineas);
 
             if ($i != 0) {
 

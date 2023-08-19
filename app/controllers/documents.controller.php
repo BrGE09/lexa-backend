@@ -2,7 +2,7 @@
 
 require_once("../../database/database.php");
 
-class RecordsController extends BssaseDatos
+class DocumentController extends BaseDatos
 {
     public function createDocument($dname, $rout, $flSize, $reg_date, $rd_time, $idRd, $idFl){
 
@@ -47,7 +47,7 @@ class RecordsController extends BssaseDatos
         try {
         $query = "DELETE FROM tbl_records WHERE id_document = $id";
         $response = $this->consulta($query);
-        } catch (Excception $e) {
+        } catch (Exception $e) {
             echo ("Error: Ocurrió un error inesperado: " . $e);
 
         }
