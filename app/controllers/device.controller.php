@@ -47,7 +47,7 @@ class DeviceController extends BaseDatos
 
         try {
             $query = "DELETE FROM tbl_credentials WHERE id_record = $id;";
-            $response = $this->consulta($query);
+            $this->consulta($query);
         } catch (\Throwable $e) {
             echo ("Error: Ocurrió un error inesperado: " . $e);
         }
