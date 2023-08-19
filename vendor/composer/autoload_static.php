@@ -11,6 +11,10 @@ class ComposerStaticInit425042b1ec81795534fcd056055c4d6e
         array (
             'Twilio\\' => 7,
         ),
+        'L' => 
+        array (
+            'Luecano\\NumeroALetras\\' => 22,
+        ),
         'B' => 
         array (
             'Brandonge\\LexaBackend\\' => 22,
@@ -21,6 +25,10 @@ class ComposerStaticInit425042b1ec81795534fcd056055c4d6e
         'Twilio\\' => 
         array (
             0 => __DIR__ . '/..' . '/twilio/sdk/src/Twilio',
+        ),
+        'Luecano\\NumeroALetras\\' => 
+        array (
+            0 => __DIR__ . '/..' . '/luecano/numero-a-letras/src',
         ),
         'Brandonge\\LexaBackend\\' => 
         array (
