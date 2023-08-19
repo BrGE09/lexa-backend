@@ -37,11 +37,9 @@ class VoucherModel
             $cantidad_regist_agregados =  ($cantidad_registros - 1);
 
             if ($i != 0) {
-                
+
                 $datos = explode(',', $linea);
                 $datoImporte = str_replace(['$', ','], '', $datos);
-                // var_dump($datos);
-                // exit;
 
                 $NodeRecibo = !empty($datos[0])  ? ($datos[0]) : '0';
                 $CIA = !empty($datos[1])  ? ($datos[1]) : '';

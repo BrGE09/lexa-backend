@@ -9,7 +9,6 @@ class RecordsModel
     {
 
         $control = new RecordsController();
-
         $ahora = new DateTime('now', new DateTimeZone('America/Mexico_city'));
 
         $nombre      = $_REQUEST["name"];
