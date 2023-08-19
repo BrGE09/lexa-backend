@@ -3,7 +3,7 @@ require '../../vendor/autoload.php';
 require_once("../controllers/records.controller.php");
 use Twilio\Rest\Client;
 
-class Verificacion
+class VerificacionModel
 {
     private $sid     = "AC6714f234ca7b5128d3e852dc9ae668ab";
     private $token   = "f2d555d22d2c36b4c45704de92a6aba6";
