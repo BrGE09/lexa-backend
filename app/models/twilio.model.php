@@ -9,8 +9,11 @@ class Verificacion
     private $token   = "f2d555d22d2c36b4c45704de92a6aba6";
     private $service = "VA6d28ce87426873c6487387eab696a755";
 
-    public function verificarNumero($lada, $numero)
+    public function verificarNumero()
     {
+        $lada   = $_REQUEST["lada"];
+        $numero = $_REQUEST["numero"];
+
         $twilio = new Client($this->sid, $this->token);
 
         if (isset($lada, $numero)) {
@@ -22,8 +25,13 @@ class Verificacion
         }
     }
 
-    public function validarCodigo($id, $lada, $numero, $codigo)
+    public function validarCodigo()
     {
+        $id     = $_REQUEST["id"];
+        $lada   = $_REQUEST["lada"];
+        $numero = $_REQUEST["numero"];
+        $codigo = $_REQUEST["codigo"];
+
         $obj    = new RecordsController();
         $twilio = new Client($this->sid, $this->token);
 
@@ -38,7 +46,7 @@ class Verificacion
                 );
 
             if ($verification_check->status === "approved") {
-                // $obj->verificaciones();
+                $obj->verificaciones($id, $lada, $numero);
                 return header("Location: ...");
             }
         } else {

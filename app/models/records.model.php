@@ -24,8 +24,6 @@ class RecordsModel
         $cp          = $_REQUEST["cp"];
         $curp        = $_REQUEST["curp"];
         $rfc         = $_REQUEST["rfc"];
-        $lada        = $_REQUEST["lada_number"];
-        $noTlf       = $_REQUEST["telephone_number"];
         $correo      = $_REQUEST["email"];
         $nombreCta   = $_REQUEST["name_holder_cb"];
         $idBanco     = $_REQUEST["id_banks"];
@@ -34,7 +32,7 @@ class RecordsModel
         $hrRegistro  = $ahora->format("h:i:s");
         $hrAct       = $ahora->format("Y-m-d h:i:s");
 
-        $control->createRecord($nombre, $apM, $apP, $fNacimiento, $calle, $noExt, $noInt, $colonia, $ciudad, $estado, $cp, $curp, $rfc, $lada, $noTlf, $correo, $nombreCta, $idBanco, $clabe, $fechaRgtro, $hrRegistro, $hrAct);
+        $control->createRecord($nombre, $apM, $apP, $fNacimiento, $calle, $noExt, $noInt, $colonia, $ciudad, $estado, $cp, $curp, $rfc, $correo, $nombreCta, $idBanco, $clabe, $fechaRgtro, $hrRegistro, $hrAct);
     }
 
     public function verRecords(){
