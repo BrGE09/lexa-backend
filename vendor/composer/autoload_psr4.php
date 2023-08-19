@@ -6,5 +6,6 @@ $vendorDir = dirname(__DIR__);
 $baseDir = dirname($vendorDir);
 
 return array(
-    'Luecano\\NumeroALetras\\' => array($vendorDir . '/luecano/numero-a-letras/src'),
+    'Twilio\\' => array($vendorDir . '/twilio/sdk/src/Twilio'),
+    'Brandonge\\LexaBackend\\' => array($baseDir . '/src'),
 );

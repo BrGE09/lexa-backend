@@ -7,16 +7,24 @@ namespace Composer\Autoload;
 class ComposerStaticInit425042b1ec81795534fcd056055c4d6e
 {
     public static $prefixLengthsPsr4 = array (
-        'L' => 
+        'T' => 
         array (
-            'Luecano\\NumeroALetras\\' => 22,
+            'Twilio\\' => 7,
+        ),
+        'B' => 
+        array (
+            'Brandonge\\LexaBackend\\' => 22,
         ),
     );
 
     public static $prefixDirsPsr4 = array (
-        'Luecano\\NumeroALetras\\' => 
+        'Twilio\\' => 
         array (
-            0 => __DIR__ . '/..' . '/luecano/numero-a-letras/src',
+            0 => __DIR__ . '/..' . '/twilio/sdk/src/Twilio',
+        ),
+        'Brandonge\\LexaBackend\\' => 
+        array (
+            0 => __DIR__ . '/../..' . '/src',
         ),
     );
 
