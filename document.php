@@ -1,3 +1,4 @@
+
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -8,36 +9,36 @@
 <body>
 <form action="app/models/document.model.php" method="POST">
     <div>
-    <label for="name">dname</label>
-        <input type="text" id="dname" name="dname">
+        <label for="documente_name">Nombre del documento</label>
+        <input type="text" id="documente_name" name="documente_name">
     </div>
     <div>
-    <label for="apM">rout</label>
-        <input type="text" id="rout" name="rout">
+        <label for="route">Ruta</label>
+        <input type="text" id="route" name="route">
     </div>
     <div>
-    <label for="apP">flSize</label>
-        <input type="text" id="flSize" name="flSize">
-    </div>
-    <div>
-    <label for="name">reg_date</label>
-        <input type="text" id="reg_date" name="reg_date">
-    </div>
-    <div>
-    <label for="name">rd_time</label>
-        <input type="text" id="rd_time" name="rd_time">
+        <label for="file_size">Tamaño del archivo</label>
+        <input type="text" id="file_size" name="file_size">
     </div>
 
     <div>
-    <label for="name">idRd</label>
-        <input type="text" id="idRd" name="idRd">
+        <label for="registration_date">registration_date</label>
+        <input type="date" id="registration_date" name="registration_date">
     </div>
     <div>
-    <label for="name">idFl</label>
-        <input type="text" id="idFl" name="idFl">
+        <label for="record_time">record_time</label>
+        <input type="time" id="record_time" name="record_time">
     </div>
-    
-    <input type="submit" class="btn btn-primary" value="guardar datos"></input>
-    </form>
+
+    <div>
+        <label for="id_record">id_record</label>
+        <input type="number" id="id_record" name="id_record">
+    </div>
+    <div>
+        <label for="id_file">id_file</label>
+        <input type="number" id="id_file" name="id_file">
+    </div>
+    <input type="submit" class="btn btn-primary" value="Guardar datos">
+</form>
 </body>
 </html>
