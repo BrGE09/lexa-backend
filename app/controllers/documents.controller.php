@@ -8,10 +8,12 @@ class DocumentController extends BaseDatos
 
 
         try {
-            $query = "INSERT INTO  tbl_document (id_document, documente_name, route, file_size, registration_date, record_time, id_record, id_file) VALUES ('$dname','$rout', '$flSize','$reg_date','$rd_time','$idRd','$idFl')";
+            $query = "INSERT INTO  tbl_document (documente_name, route, file_size, registration_date, record_time, id_record, id_file) 
+            VALUES ('$dname','$rout', '$flSize','$reg_date','$rd_time','$idRd','$idFl');";
 
+            echo $query;
             if ($this->consulta($query)) {
-                header("Location: ...");
+                header("Location: /Lexa-Backend/document.php?=Datos guardadosß");
             }
         } catch (Exception $e ) {
             echo ("Error: Ocurrió un error inesperado:" . $e);
