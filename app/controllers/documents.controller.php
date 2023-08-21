@@ -11,41 +11,39 @@ class DocumentController extends BaseDatos
                       VALUES ('$documente_name', '$route', '$file_size', '$registration_date', '$record_time', '$id_record', '$id_file')";
 
             if ($this->consulta($query)) {
-                header("Location: /Lexa-Backend/document.php?message=Datos guardados"); //Importante: asegúrate de terminar el script después de la redirección
+                header("Location: /Lexa-Backend/document.php?message=Datos guardados");
             }
         } catch (Exception $e) {
             echo ("Error: Ocurrió un error inesperado: " . $e->getMessage());
         }
     }
 
-    public function viewDocument($id){
+    public function viewDocument($documente_name, $route, $file_size, $registration_date, $record_time, $id_record, $id_file){
 
         try {
-            $query = "SELECT * FROM  id_document WHERE id_document = $id";
-
+            $query = "SELECT * FROM  id_document WHERE id_document = $documente_name";
             $response = $this->consulta($query);
-
             return $response->fetch_object();
-
         } catch (Exception $e) {
             echo ("Error: Ocurrió un error inesperado: " . $e);
         }
     }
 
-    public function updateDocument($id){
+    public function updateDocument($documente_name, $route, $file_size, $registration_date, $record_time, $id_record, $id_file, $id_document ){
 
         try {
-            //code...
-        } catch (\Throwable $th) {
-            //throw $th;
+            $query = "UPDATE tbl_document SET document_name='$documente_name',route='$route',file_size='$file_size',registration_date='$registration_date',record_time ='$record_time', id_record ='$id_record', id_file ='$id_file' WHERE id_document = '$id_document'";
+            $this->consulta($query);
+        } catch (Exception $e) {
+            echo("Error: Ocurrió un error inesperado: " .$e);
         }
 
     }
 
-    public function deleteDocument($id){
+    public function deleteDocument($documente_name){
 
         try {
-        $query = "DELETE FROM tbl_records WHERE id_document = $id";
+        $query = "DELETE FROM tbl_records WHERE id_document = $documente_name";
         $response = $this->consulta($query);
         } catch (Exception $e) {
             echo ("Error: Ocurrió un error inesperado: " . $e);

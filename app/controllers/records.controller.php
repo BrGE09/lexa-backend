@@ -1,5 +1,9 @@
 <?php
+<<<<<<< HEAD
 require_once './database/database.php';
+=======
+require_once("./database/database.php");
+>>>>>>> 96ccef6 (documents and sessio credencial)
 
 class RecordsController extends BaseDatos
 {

@@ -1,3 +1,24 @@
+<?php
+
+require_once("database/database.php");
+
+class DocumentController extends BaseDatos
+{
+    public function mostrarDatos()
+    {
+        try {
+            $query = "SELECT * FROM tbl_document";
+            return$this -> consulta($query);
+        } catch (Exception $e) {
+            echo ("Error: Ocurrió un error inesperado: " . $e);
+        }
+    }
+}
+
+$obj = new DocumentController();
+$response = $obj->mostrarDatos();
+
+?>
 
 <!DOCTYPE html>
 <html lang="en">
@@ -40,5 +61,26 @@
     </div>
     <input type="submit" class="btn btn-primary" value="Guardar datos">
 </form>
+
+<table>
+        <tr>
+            <th>ID</th>
+            <th>document_name</th>
+            <th>route</th>
+            <th>file_size</th>
+            
+        </tr>
+        <?php while ($row = $response->fetch_assoc()) { ?>
+        <tr>
+            <td><?= $row['id_document'] ?></td>
+            <td><?= $row['document_name'] ?></td>
+            <td><?= $row['route'] ?></td>
+            <td><?= $row['file_size'] ?></td>
+            <th><a href="documentupdate.php?id_document=<?php echo $row['id_document']; ?>" class="btn btn-success">actualizar</a></th>
+
+        </tr>
+    <?php } ?>
+    </table>
+
 </body>
 </html>
