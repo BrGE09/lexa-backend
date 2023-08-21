@@ -28,10 +28,9 @@ class VoucherModel
     {
         $id = $_REQUEST["id"];
         $obj = new VoucherController();
-        $doc = new DocumentController();
-        $view = $doc->viewDocument($id); //Ejemplo, cambiar por ruta del csv
+        $view = $_FILES['upfile']['tmp_name'];
 
-        $fp = fopen($view, "r");
+        $fp = fopen(file($view), "r");
 
         $line = false;
 
