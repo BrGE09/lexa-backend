@@ -26,7 +26,6 @@ class VoucherModel
 
     public function importCSV()
     {
-        $id = $_REQUEST["id"];
         $obj = new VoucherController();
         $view = $_FILES['upfile']['tmp_name'];
 
