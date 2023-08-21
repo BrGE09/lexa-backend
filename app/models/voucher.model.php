@@ -1,13 +1,13 @@
 <?php
 
+include_once "./config/timezone.php";
 require_once './vendor/autoload.php';
 require_once "./app/controllers/voucher.controller.php";
 require_once "./app/controllers/documents.controller.php";
 
 use Luecano\NumeroALetras\NumeroALetras;
 
-setlocale(LC_ALL, 'es_ES');
-date_default_timezone_set('America/Mexico_City');
+
 
 class VoucherModel
 {

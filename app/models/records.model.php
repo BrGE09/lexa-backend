@@ -1,9 +1,7 @@
 <?php
 
+include_once "./config/timezone.php";
 require_once './app/controllers/records.controller.php';
-
-setlocale(LC_ALL, 'es_ES');
-date_default_timezone_set('America/Mexico_City');
 
 class RecordsModel
 {
