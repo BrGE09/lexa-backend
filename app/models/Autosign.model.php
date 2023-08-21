@@ -1,15 +1,17 @@
 <?php
 
-require_once("../controllers/records.controller.php");
-require_once("../controllers/documents.controller.php");
+require_once "./app/controllers/records.controller.php";
+require_once "./app/controllers/documents.controller.php";
 
 class AutoSignModel
 {
 
     private $auth = "OUQ2NEJDN0QtM0VDQi00MTI5LTk1QTItNjQ2Njc1OEEyMzdEOkNEOTIyQUMxLTYwQzctNDUwQi05QzM2LTQxOTIyRUVEM0NGOQ==";
-    private $tokenAuth;
+    private $token;
 
-    private function __construct()
+
+    // Constuctor de la clase para generar el token cada que la misma sea invocada automáticamente.
+    function __construct()
     {
         $curl = curl_init();
 
@@ -29,17 +31,77 @@ class AutoSignModel
         ));
 
         $response = curl_exec($curl);
+
+        $datos = json_decode($response, true);
+
+        return $this->token = $datos["access_token"];
+
         curl_close($curl);
-
-        $datos = json_decode($response);
-
-        foreach ($datos as $dato) {
-            $token = $dato->access_token;
-        }
-
-        return $this->tokenAuth = $token;
     }
 
+    // Obtener del documento firmado.
+    private function documentoFirmado()
+    {
+        $curl = curl_init();
+
+        curl_setopt_array($curl, array(
+            CURLOPT_URL => 'https://wstestautosign.doc2sign.com/RESTDoc2SignLite/GETDocFirmado?Identificador=123&ambiente=0',
+            CURLOPT_RETURNTRANSFER => true,
+            CURLOPT_ENCODING => '',
+            CURLOPT_MAXREDIRS => 10,
+            CURLOPT_TIMEOUT => 0,
+            CURLOPT_FOLLOWLOCATION => true,
+            CURLOPT_HTTP_VERSION => CURL_HTTP_VERSION_1_1,
+            CURLOPT_CUSTOMREQUEST => 'GET',
+            CURLOPT_HTTPHEADER => array(
+                'Authorization: Bearer ' . $this->token
+            ),
+        ));
+
+        $response = curl_exec($curl);
+
+        curl_close($curl);
+
+        $array_data = json_decode($response, true);
+        $base = $array_data['GETDocFirmadoResult'];
+        $base64PDF = $base;
+
+        if ($decodedPDF = base64_decode($base64PDF, true)) {
+            $filename = 'archivo_' . uniqid() . '.pdf';
+            $file_path = './pdf/' . $filename;
+            if (!is_dir('./pdf')) {
+                mkdir('./pdf', 0755, true);
+            }
+            if (file_put_contents($file_path, $decodedPDF)) {
+
+                header('Content-Description: File Transfer');
+                header('Content-Type: application/octet-stream');
+                header('Content-Disposition: attachment; filename="' . $filename . '"');
+                header('Expires: 0');
+                header('Cache-Control: must-revalidate');
+                header('Pragma: public');
+                header('Content-Length: ' . filesize($file_path));
+                readfile($file_path);
+                unlink($file_path);
+
+                exit;
+            } else {
+                echo "Error al guardar el archivo PDF.";
+            }
+        } else {
+            echo "El contenido Base64 del PDF es inválido.";
+        }
+    }
+
+    // Conversión del archivo en Base64
+    private function file_to_base64($pathArchivo)
+    {
+        $file_content = file_get_contents($pathArchivo);
+        $base64_string = base64_encode($file_content);
+        return $base64_string;
+    }
+
+    // Función a utilizar para crear la firma del documento.
     public function firma()
     {
 
@@ -54,26 +116,15 @@ class AutoSignModel
             $row        = $obj->viewRecord($id);
             $rowArchivo = $doc->viewDocument($id);
 
-            $nombre = $row['nombre'];
-            $aMaterno = $row['aMaterno'];
-            $aPaterno = $row['aPaterno'];
-            $rfc = $row['rfc'];
-            $correo = $row['correo'];
+            $nombre = $row->nombre;
+            $aMaterno = $row->mother_last_name;
+            $aPaterno = $row->last_name;
+            $rfc = $row->rfc;
+            $correo = $row->email;
 
-            $pathArchivo = $rowArchivo['ruta_archivo'];
+            $pathArchivo = $rowArchivo->route;
 
-            function file_to_base64($file_path)
-            {
-                $file_content = file_get_contents($file_path);
-                $base64_string = base64_encode($file_content);
-                return $base64_string;
-            }
-
-            try {
-                $base64_string = file_to_base64($pathArchivo);
-            } catch (Exception $e) {
-                echo "Se produjo un error durante la conversión: " . $e->getMessage();
-            }
+            $base64_string = $this->file_to_base64($pathArchivo);
         }
 
         $curl = curl_init();
@@ -88,7 +139,7 @@ class AutoSignModel
             CURLOPT_HTTP_VERSION => CURL_HTTP_VERSION_1_1,
             CURLOPT_CUSTOMREQUEST => 'POST',
             CURLOPT_POSTFIELDS => '{
-            "Identificador": "'. $idUsuario .'",
+            "Identificador": "' . $idUsuario . '",
             "Firmantes": [{
             "ApPaterno": "' . $aPaterno . '",
             "ApMaterno": "' . $aMaterno . '",
@@ -130,66 +181,19 @@ class AutoSignModel
             CURLOPT_HTTPHEADER => array(
                 'ambiente: 0',
                 'Content-Type: application/json',
-                'Authorization: Bearer ' . $this->tokenAuth
+                'Authorization: Bearer ' . $this->token
             ),
         ));
 
         $response = curl_exec($curl);
 
-        curl_close($curl);
-        header("Location: GETDocFirmado.php");
-    }
-
-    public function documentoFirmado()
-    {
-        $curl = curl_init();
-
-        curl_setopt_array($curl, array(
-            CURLOPT_URL => 'https://wstestautosign.doc2sign.com/RESTDoc2SignLite/GETDocFirmado?Identificador=123&ambiente=0',
-            CURLOPT_RETURNTRANSFER => true,
-            CURLOPT_ENCODING => '',
-            CURLOPT_MAXREDIRS => 10,
-            CURLOPT_TIMEOUT => 0,
-            CURLOPT_FOLLOWLOCATION => true,
-            CURLOPT_HTTP_VERSION => CURL_HTTP_VERSION_1_1,
-            CURLOPT_CUSTOMREQUEST => 'GET',
-            CURLOPT_HTTPHEADER => array(
-                'Authorization: Bearer ' . $this->tokenAuth
-            ),
-        ));
-
-        $response = curl_exec($curl);
-
-        curl_close($curl);
-
-        $array_data = json_decode($response, true);
-        $base = $array_data['GETDocFirmadoResult'];
-        $base64PDF = $base;
-
-        if ($decodedPDF = base64_decode($base64PDF, true)) {
-            $filename = 'archivo_' . uniqid() . '.pdf';
-            $file_path = './pdf/' . $filename;
-            if (!is_dir('./pdf')) {
-                mkdir('./pdf', 0755, true);
-            }
-            if (file_put_contents($file_path, $decodedPDF)) {
-
-                header('Content-Description: File Transfer');
-                header('Content-Type: application/octet-stream');
-                header('Content-Disposition: attachment; filename="' . $filename . '"');
-                header('Expires: 0');
-                header('Cache-Control: must-revalidate');
-                header('Pragma: public');
-                header('Content-Length: ' . filesize($file_path));
-                readfile($file_path);
-                unlink($file_path);
-
-                exit;
-            } else {
-                echo "Error al guardar el archivo PDF.";
-            }
+        if ($response != null) {
+            $this->documentoFirmado();
         } else {
-            echo "El contenido Base64 del PDF es inválido.";
+            echo ("Ocurrió un error al firmar el documento, intente de nuevo más tarde.");
         }
+
+
+        curl_close($curl);
     }
 }

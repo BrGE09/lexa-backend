@@ -9,6 +9,7 @@ class VerificacionModel
     private $token   = "f2d555d22d2c36b4c45704de92a6aba6";
     private $service = "VA6d28ce87426873c6487387eab696a755";
 
+
     public function verificarNumero()
     {
         $lada   = $_REQUEST["lada"];
