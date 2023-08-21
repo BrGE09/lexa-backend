@@ -48,7 +48,7 @@ class VerificacionModel
                 );
 
             if ($verification_check->status === "approved") {
-                $obj->verificaciones($id, $lada, $numero);
+                $obj->phone($id, $lada, $numero);
                 return header("Location: ...");
             }
         } else {

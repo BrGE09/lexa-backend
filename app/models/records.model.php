@@ -10,12 +10,21 @@ class RecordsModel
     {
 
         $control = new RecordsController();
-        $ahora = new DateTime();
 
         $nombre      = $_REQUEST["name"];
         $apM         = $_REQUEST["last_name"];
         $apP         = $_REQUEST["mother_last_name"];
         $fNacimiento = $_REQUEST["birth_date"];
+        $correo      = $_REQUEST["email"];
+
+        $control->createRecord($nombre, $apM, $apP, $fNacimiento, $correo);
+    }
+
+    public function address()
+    {
+        $control = new RecordsController();
+
+        $id          = $_REQUEST["id"];
         $calle       = $_REQUEST["street"];
         $noExt       = $_REQUEST["outdoor_number"];
         $noInt       = $_REQUEST["number"];
@@ -25,7 +34,16 @@ class RecordsModel
         $cp          = $_REQUEST["cp"];
         $curp        = $_REQUEST["curp"];
         $rfc         = $_REQUEST["rfc"];
-        $correo      = $_REQUEST["email"];
+
+        $control->address($id, $calle, $noExt, $noInt, $colonia, $ciudad, $estado, $cp, $curp, $rfc);
+    }
+
+    public function bankAccount()
+    {
+        $ahora = new DateTime();
+        $control = new RecordsController();
+
+        $id          = $_REQUEST["id"];
         $nombreCta   = $_REQUEST["name_holder_cb"];
         $idBanco     = $_REQUEST["id_banks"];
         $clabe       = $_REQUEST["account_clabe_cb"];
@@ -33,10 +51,7 @@ class RecordsModel
         $hrRegistro  = $ahora->format("h:i:s");
         $hrAct       = $ahora->format("Y-m-d h:i:s");
 
-        $control->createRecord($nombre, $apM, $apP, $fNacimiento, $calle, $noExt, $noInt, $colonia, $ciudad, $estado, $cp, $curp, $rfc, $correo, $nombreCta, $idBanco, $clabe, $fechaRgtro, $hrRegistro, $hrAct);
-    }
 
-    public function verRecords(){
-
+        $control->bank($id, $nombreCta, $idBanco, $clabe, $fechaRgtro, $hrRegistro, $hrAct);
     }
 }

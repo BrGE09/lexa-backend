@@ -4,13 +4,13 @@ require_once './database/database.php';
 class RecordsController extends BaseDatos
 {
 
-    public function createRecord($nombre, $apM, $apP, $fNacimiento, $calle, $noExt, $noInt, $colonia, $ciudad, $estado, $cp, $curp, $rfc, $correo, $nombreCta, $idBanco, $clabe, $fechaRegtro, $hrRegistro, $horaAct)
+    public function createRecord($nombre, $apM, $apP, $fNacimiento, $correo)
     {
 
         try {
 
-            $query = "INSERT INTO tbl_records (name, last_name, mother_last_name, birth_date, street, outdoor_number, number, cologne, city, state, cp, curp, rfc, lada_number, telephone_number, email, name_holder_cb, id_banks, account_clabe_cb, registration_date, record_time, record_update)
-            VALUES ('$nombre', '$apM', '$apP', '$fNacimiento', '$calle', '$noExt', '$noInt', '$colonia', '$ciudad', '$estado', '$cp', '$curp', '$rfc', '$correo', '$nombreCta', '$idBanco', '$clabe', '$fechaRegtro', '$hrRegistro', '$horaAct');";
+            $query = "INSERT INTO tbl_records (name, last_name, mother_last_name, birth_date, email)
+            VALUES ('$nombre', '$apM', '$apP', '$fNacimiento', '$correo');";
 
             if ($this->consulta($query)) {
                 header("Location: /Lexa-Backend/index.php?=Datos guardadosß");
@@ -34,21 +34,33 @@ class RecordsController extends BaseDatos
         }
     }
 
-    public function verificaciones($id, $lada, $numero){
+    public function address($id, $calle, $noExt, $noInt, $colonia, $ciudad, $estado, $cp, $curp, $rfc)
+    {
         try {
-            $query = "UPDATE tbl_records SET lada_number = $lada, telephone_number = $numero WHERE id_record = $id;";
+            $query = "UPDATE tbl_records SET street = '$calle', outdoor_number = '$noExt', number = '$noInt', cologne = '$colonia', city = '$ciudad', state = '$estado', cp = '$cp', curp =  '$curp', rfc = '$rfc' WHERE id_record = $id;";
             $this->consulta($query);
         } catch (Exception $e) {
-            echo ("Error: Ocurrió un error inesperado:" . $e);
+            echo ("Error: Ocurrió un error inesperado: " . $e);
         }
     }
 
-    public function updateRecord()
+    public function phone($id, $lada, $phone)
     {
         try {
-            //code...
+            $query = "UPDATE tbl_records SET lada_number = '$lada', telephone_number = '$phone' WHERE id_record = $id;";
+            $this->consulta($query);
         } catch (Exception $e) {
-            //throw $th;
+            echo ("Error: Ocurrió un error inesperado: " . $e);
+        }
+    }
+
+    public function bank($id, $nombreCta, $idBank, $clabe, $fechaRgtro, $hrRegistro, $hrAct)
+    {
+        try {
+            $query = "UPDATE tbl_records SET name_holder_cb = '$nombreCta', id_bank = '$idBank', account_clabe_cb = '$clabe', registration_date = '$fechaRgtro', record_time = '$hrRegistro', record_update = '$hrAct' WHERE id_record = $id;";
+            $this->consulta($query);
+        } catch (Exception $e) {
+            echo ("Error: Ocurrió un error inesperado: " . $e);
         }
     }
 
