@@ -1,22 +1,19 @@
 <?php
-
 require_once("../../database/database.php");
 
 class DocumentController extends BaseDatos
 {
-    public function createDocument($dname, $rout, $flSize, $reg_date, $rd_time, $idRd, $idFl){
-
-
+    public function createDocument($documente_name, $route, $file_size, $registration_date, $record_time, $id_record, $id_file)
+    {
         try {
-            $query = "INSERT INTO  tbl_document (documente_name, route, file_size, registration_date, record_time, id_record, id_file) 
-            VALUES ('$dname','$rout', '$flSize','$reg_date','$rd_time','$idRd','$idFl');";
+            $query = "INSERT INTO tbl_document (document_name, route, file_size, registration_date, record_time, id_record, id_file) 
+                      VALUES ('$documente_name', '$route', '$file_size', '$registration_date', '$record_time', '$id_record', '$id_file')";
 
-            echo $query;
             if ($this->consulta($query)) {
-                header("Location: /Lexa-Backend/document.php?=Datos guardadosß");
+                header("Location: /Lexa-Backend/document.php?message=Datos guardados"); //Importante: asegúrate de terminar el script después de la redirección
             }
-        } catch (Exception $e ) {
-            echo ("Error: Ocurrió un error inesperado:" . $e);
+        } catch (Exception $e) {
+            echo ("Error: Ocurrió un error inesperado: " . $e->getMessage());
         }
     }
 
