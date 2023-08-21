@@ -60,7 +60,7 @@ class VoucherModel
             $nameImage = "./resources/image/Alimentos.jpg";
             $image = imagecreatefromjpeg($nameImage);
             $color = imagecolorallocate($image, 0, 0, 0);
-            $size = 29;
+            $size = 27;
             $angle = 0;
 
             $xFolio = 2000;
@@ -68,24 +68,24 @@ class VoucherModel
             $folio = $row->folio;
 
             $cantidad = $row->import;
-            $xCantidad = 300;
-            $yCantidad = 530;
+            $xCantidad = 230;
+            $yCantidad = 528;
 
             $cantidadTxt = $importe . " MXN";
             $xCantidadTxt = 800;
-            $yCantidadTxt = 530;
+            $yCantidadTxt = 528;
 
             $day = date_format(new DateTime(), "d");
             $xDay = 1160;
-            $yDay = 1280;
+            $yDay = 1278;
 
             $month = $esp["mes"];
             $xMonth = 1700;
-            $yMonth = 1280;
+            $yMonth = 1278;
 
             $year = date_format(new DateTime(), "y");
             $xYear = 2180;
-            $yYear = 1280;
+            $yYear = 1278;
 
             $name = $row->partner;
             $xName = 600;
@@ -99,7 +99,7 @@ class VoucherModel
             imagettftext($image, $size, $angle, $xYear, $yYear, $color, $font, $year);
             imagettftext($image, $size, $angle, $xName, $yName, $color, $font, $name);
 
-            $salida = "./Recibo_Alimentos.jpg";
+            $salida = "./Recibo_$row->folio.jpg";
             imagejpeg($image, $salida);
 
             echo ("Se ha generado el recibo correctamente como: " . $salida);
