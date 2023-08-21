@@ -39,7 +39,7 @@ class AutoSignModel
         curl_close($curl);
     }
 
-    // Obtener del documento firmado.
+    // Obtener el documento firmado.
     private function documentoFirmado()
     {
         $curl = curl_init();
