@@ -27,7 +27,7 @@ class VoucherModel
     public function importCSV()
     {
         $obj = new VoucherController();
-        $view = $_FILES['upfile']['tmp_name'];
+        $view = $_FILES['csv']['tmp_name'];
 
         $fp = fopen(file($view), "r");
 
@@ -42,8 +42,9 @@ class VoucherModel
         fclose($fp);
     }
 
-    public function recibo($id)
+    public function recibo()
     {
+        $id  = $_REQUEST["id"];
         $obj = new VoucherController();
         $row = $obj->generateVoucher($id);
         $esp = $this->fecha(new DateTime());
