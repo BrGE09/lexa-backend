@@ -5,7 +5,7 @@ require_once './app/controllers/records.controller.php';
 
 class RecordsModel
 {
-
+        
     public static function newRecord()
     {
 
