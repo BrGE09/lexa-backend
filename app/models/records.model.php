@@ -2,6 +2,9 @@
 
 require_once './app/controllers/records.controller.php';
 
+setlocale(LC_ALL, 'es_ES');
+date_default_timezone_set('America/Mexico_City');
+
 class RecordsModel
 {
 
@@ -9,7 +12,7 @@ class RecordsModel
     {
 
         $control = new RecordsController();
-        $ahora = new DateTime('now', new DateTimeZone('America/Mexico_city'));
+        $ahora = new DateTime();
 
         $nombre      = $_REQUEST["name"];
         $apM         = $_REQUEST["last_name"];
