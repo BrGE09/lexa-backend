@@ -1,6 +1,6 @@
 <?php
 
-    require_once("../controllers/documents.controller.php");
+    require_once './app/controllers/documents.controller.php';
     
     $recibe = new DocumentController();
 

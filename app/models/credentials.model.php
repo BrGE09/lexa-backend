@@ -1,6 +1,6 @@
 <?php
 
-require_once("../controllers/credentials.controller.php");
+require_once './app/controllers/credentials.controller.php';
 
 class CredentialsModel
 {

@@ -1,10 +1,6 @@
 <?php
-<<<<<<< HEAD
-require_once("../../database/database.php");
-=======
 
 require_once("./database/database.php");
->>>>>>> df19fdc (Autosign)
 
 class DocumentController extends BaseDatos
 {

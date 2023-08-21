@@ -1,6 +1,7 @@
 <?php
-require '../../vendor/autoload.php';
-require_once("../controllers/records.controller.php");
+require './vendor/autoload.php';
+require_once './controllers/records.controller.php';
+
 use Twilio\Rest\Client;
 
 class VerificacionModel

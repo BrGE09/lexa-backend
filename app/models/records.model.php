@@ -1,6 +1,6 @@
 <?php
 
-require_once("../controllers/records.controller.php");
+require_once './app/controllers/records.controller.php';
 
 class RecordsModel
 {

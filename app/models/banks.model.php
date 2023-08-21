@@ -1,6 +1,6 @@
 <?php
 
-require_once("../controllers/banks.controller.php");
+require_once './app/controllers/banks.controller.php';
 
 class BanksModel{
 

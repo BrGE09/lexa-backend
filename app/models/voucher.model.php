@@ -1,6 +1,6 @@
 <?php
-require '../../vendor/autoload.php';
-require_once("../controllers/voucher.controller.php");
+require './vendor/autoload.php';
+require_once './controllers/voucher.controller.php';
 
 use Luecano\NumeroALetras\NumeroALetras;
 
