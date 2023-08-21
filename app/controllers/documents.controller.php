@@ -54,6 +54,4 @@ class DocumentController extends BaseDatos
 
     }
 }
-
-
 ?>
