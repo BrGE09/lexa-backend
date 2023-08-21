@@ -3,7 +3,7 @@
         'name' => 'brandonge/lexa-backend',
         'pretty_version' => 'dev-main',
         'version' => 'dev-main',
-        'reference' => '0305ad0a74a56ca88a4dc95fd58954f89b580741',
+        'reference' => 'a69e2e7f8c31e5eddb5882f9baafec63cf3d3ace',
         'type' => 'library',
         'install_path' => __DIR__ . '/../../',
         'aliases' => array(),
@@ -13,7 +13,7 @@
         'brandonge/lexa-backend' => array(
             'pretty_version' => 'dev-main',
             'version' => 'dev-main',
-            'reference' => '0305ad0a74a56ca88a4dc95fd58954f89b580741',
+            'reference' => 'a69e2e7f8c31e5eddb5882f9baafec63cf3d3ace',
             'type' => 'library',
             'install_path' => __DIR__ . '/../../',
             'aliases' => array(),

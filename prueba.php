@@ -1,7 +1,7 @@
 <?php
 
-require("app/models/Autosign.model.php");
+require("./app/models/voucher.model.php");
 
-$obj = new AutoSignModel();
+$obj = new VoucherModel();
 
-$obj->firma();
+$obj->recibo($id);

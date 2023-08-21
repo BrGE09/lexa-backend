@@ -1,6 +1,8 @@
 <?php
-require './vendor/autoload.php';
-require_once './controllers/voucher.controller.php';
+
+require_once './vendor/autoload.php';
+require_once "./app/controllers/voucher.controller.php";
+require_once "./app/controllers/documents.controller.php";
 
 use Luecano\NumeroALetras\NumeroALetras;
 
@@ -24,51 +26,28 @@ class VoucherModel
 
     public function importCSV()
     {
+        $id = $_REQUEST["id"];
         $obj = new VoucherController();
-        $tipo       = $_FILES['dataCliente']['type'];
-        $tamanio    = $_FILES['dataCliente']['size'];
-        $archivotmp = $_FILES['dataCliente']['tmp_name'];
-        $lineas     = file($archivotmp);
+        $doc = new DocumentController();
+        $view = $doc->viewDocument($id); //Ejemplo, cambiar por ruta del csv
 
-        $i = 0;
+        $fp = fopen($view/*Cambiar por archivo*/, "r");
 
-        foreach ($lineas as $linea) {
-            count($lineas);
+        $line = false;
 
-            if ($i != 0) {
-
-                $datos = explode(',', $linea);
-                $datoImporte = str_replace(['$', ','], '', $datos);
-
-                $NodeRecibo = !empty($datos[0])  ? ($datos[0]) : '0';
-                $CIA = !empty($datos[1])  ? ($datos[1]) : '';
-                $Cuentadeorigen = !empty($datos[2])  ? ($datos[2]) : '0';
-                $idUsuario = !empty($datos[3])  ? ($datos[3]) : '0';
-                $SocioComanditario = !empty($datos[4])  ? ($datos[4]) : '';
-                $Banco = !empty($datos[5])  ? ($datos[5]) : '';
-                $IdBancario = !empty($datos[6])  ? ($datos[6]) : '0';
-                $CuentaBancaria = !empty($datos[7])  ? ($datos[7]) : '0';
-                $CLABEInterbancaria = !empty($datos[8])  ? ($datos[8]) : '';
-                $Importe = !empty($datoImporte[9])  ? ($datoImporte[9]) : '0';
-                $Fechaderecibo = !empty($datos[10])  ? ($datos[10]) : '';
-                $Status = !empty($datos[11])  ? ($datos[11]) : '';
-                $Etapa = !empty($datos[12])  ? ($datos[12]) : '';
-                $FechadePago = !empty($datos[13])  ? ($datos[13]) : '';
-                $Fechaderecibo = date('y-m-d', strtotime($Fechaderecibo));
-                $FechadePago = date('y-m-d', strtotime($FechadePago));
-
-                $obj->createVoucher($NodeRecibo, $CIA, $Cuentadeorigen, $idUsuario, $SocioComanditario, $Banco, $IdBancario, $CuentaBancaria, $CLABEInterbancaria, $Importe, $Fechaderecibo, $Status, $Etapa, $FechadePago);
-
-            }
-
-            $i++;
+        while ($data = fgetcsv($fp, 0, ",", "\"")) {
+            if ($line)
+                $obj->createVoucher($data[0], $data[1], $data[2], $data[3], $data[4], $data[5], $data[6], $data[7], $data[8], $data[9], $data[10], $data[11], $data[12], $data[13]);
+            $line = true;
         }
+
+        fclose($fp);
     }
 
-    public function recibo()
+    public function recibo($id)
     {
         $obj = new VoucherController();
-        $row = $obj->generateVoucher($_REQUEST["folio"]);
+        $row = $obj->generateVoucher($id);
         $esp = $this->fecha(new DateTime());
 
         if (!empty($row)) {
@@ -77,8 +56,8 @@ class VoucherModel
             $formatter->conector = 'Y';
             $importe = $formatter->toMoney($row->import, 2, 'pesos', 'centavos');
 
-            $font = "../../resources/fonts/Arial.ttf";
-            $nameImage = "../../resources/image/Alimentos.jpg";
+            $font = "./resources/fonts/Arial.ttf";
+            $nameImage = "./resources/image/Alimentos.jpg";
             $image = imagecreatefromjpeg($nameImage);
             $color = imagecolorallocate($image, 0, 0, 0);
             $size = 29;
@@ -88,7 +67,7 @@ class VoucherModel
             $yFolio = 270;
             $folio = $row->folio;
 
-            $cantidad = $importe;
+            $cantidad = $row->import;
             $xCantidad = 300;
             $yCantidad = 530;
 
@@ -120,7 +99,7 @@ class VoucherModel
             imagettftext($image, $size, $angle, $xYear, $yYear, $color, $font, $year);
             imagettftext($image, $size, $angle, $xName, $yName, $color, $font, $name);
 
-            $salida = "Recibo_Alimentos.jpg";
+            $salida = "./Recibo_Alimentos.jpg";
             imagejpeg($image, $salida);
 
             echo ("Se ha generado el recibo correctamente como: " . $salida);
