@@ -7,6 +7,7 @@ $baseDir = dirname($vendorDir);
 
 return array(
     'Twilio\\' => array($vendorDir . '/twilio/sdk/src/Twilio'),
+    'PHPMailer\\PHPMailer\\' => array($vendorDir . '/phpmailer/phpmailer/src'),
     'Luecano\\NumeroALetras\\' => array($vendorDir . '/luecano/numero-a-letras/src'),
     'Brandonge\\LexaBackend\\' => array($baseDir . '/src'),
 );

@@ -11,6 +11,10 @@ class ComposerStaticInit425042b1ec81795534fcd056055c4d6e
         array (
             'Twilio\\' => 7,
         ),
+        'P' => 
+        array (
+            'PHPMailer\\PHPMailer\\' => 20,
+        ),
         'L' => 
         array (
             'Luecano\\NumeroALetras\\' => 22,
@@ -25,6 +29,10 @@ class ComposerStaticInit425042b1ec81795534fcd056055c4d6e
         'Twilio\\' => 
         array (
             0 => __DIR__ . '/..' . '/twilio/sdk/src/Twilio',
+        ),
+        'PHPMailer\\PHPMailer\\' => 
+        array (
+            0 => __DIR__ . '/..' . '/phpmailer/phpmailer/src',
         ),
         'Luecano\\NumeroALetras\\' => 
         array (
