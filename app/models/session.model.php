@@ -22,9 +22,6 @@ require_once("../controllers/session.controller.php");
         $select->mostrarDatos($id_credentials, $user, $password, $id_record, $registration_date, $record_time);    
     } 
 
-$sell = new SessionModel();
-$sele = $selj->select();
-
 
       /*==================================
                 METODO UPDATE
