@@ -56,7 +56,7 @@ class CorreoModel
 
             $cdt->createCredential($username, $password, $id, $dateRegister, $timeRegister);
         } catch (Exception $e) {
-            echo 'Error al enviar el correo: ' . $mail->ErrorInfo;
+            echo 'Error al enviar el correo: ' . $e;
         }
     }
 }
