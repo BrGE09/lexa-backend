@@ -44,7 +44,7 @@ class CorreoModel
             $mail->Port = 587;
 
             $mail->setFrom('jonatansamuelamarojuarez@gmail.com', 'Islas Gower & Compañia Sucesores'); //Correo de la empresa y su nombre
-            $mail->addAddress($datos->email); // Correo al que se envía, tomar del formulario
+            $mail->addAddress($datos->email); 
 
             $mail->isHTML(true);
             $mail->Subject = 'Credenciales de acceso a Islas Gower & Compañia Sucesores';
