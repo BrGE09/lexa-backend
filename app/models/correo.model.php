@@ -18,7 +18,7 @@ class CorreoModel
         $obj = new RecordsController();
         $cdt = new CredentialsController();
 
-        $datos = $obj->viewRecord($id);
+        $datos = $obj->viewRecord(5370000);
         $fechas = new DateTime();
 
         $dateRegister  = $fechas->format("Y-m-d");
@@ -30,7 +30,9 @@ class CorreoModel
         // Generate a random password
         $password = bin2hex(random_bytes(8)); // Generates an 8-character random password in hexadecimal format
 
-        $mail = new PHPMailer(true);
+        $mail = new PHPMailer(true);      
+        $path = "./resources/image/logo-islas.png";
+        $cid = "logo";        
 
         try {
             $mail->CharSet = 'UTF-8';
@@ -45,10 +47,10 @@ class CorreoModel
 
             $mail->setFrom('jonatansamuelamarojuarez@gmail.com', 'Islas Gower & Compañia Sucesores'); //Correo de la empresa y su nombre
             $mail->addAddress($datos->email); 
-
+            $mail->addEmbeddedImage($path, $cid);
             $mail->isHTML(true);
             $mail->Subject = 'Credenciales de acceso a Islas Gower & Compañia Sucesores';
-            $mail->Body = '<h1><b>Bienvenido a Islas Gower & Compañia Sucesores.</b></h1> <br><br> Aquí están tus credenciales de acceso: <br> Usuario: ' . $username . '<br> Contraseña: ' . $password . '<br><br> Link de acceso: <br> http://localhost/formulario-islas/login/login.php';
+            $mail->Body = '<h1><b>Bienvenido a Islas Gower & Compañia Sucesores.</b></h1> <br><br> <p style="font-size: 14px">Aquí están tus credenciales de acceso:</p> <p style="font-size: 14px">Usuario: ' . $username . '</p> <p style="font-size: 14px"> Contraseña: ' . $password . '</p> <br><br> <p style="font-size: 14px">Link de acceso: <br> <a>http://localhost/formulario-islas/login/login.php</a></p> <br>';
 
             $mail->send();
             echo 'CORREO ENVIADO';
